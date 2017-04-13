@@ -44,11 +44,19 @@ public class Point {
 
         double XDist, YDist, distance;
         XDist = pow(this.getXaxis() - otherPoint.getXaxis(), 2);
-        YDist = pow(this.getYaxis() - otherPoint.getYaxis(), 2);
+        YDist = pow(this.getYaxis() - otherPoint.getXaxis(), 2);
 
-        distance = sqrt(XDist + YDist);
+        distance = sqrt(XDist - YDist);
         return distance;
-
     }
 
+    public double getSlopeBetween(Point otherPoint) {
+
+        double rise, run, slope;
+        rise = this.getXaxis() - otherPoint.getXaxis();
+        run = this.getYaxis() - otherPoint.getXaxis();
+        slope = rise / run;
+
+        return slope;
+    }
 }
