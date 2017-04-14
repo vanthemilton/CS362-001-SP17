@@ -7,13 +7,13 @@ package edu.osu.cs362;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
-import static org.evosuite.runtime.EvoAssertions.*;
+/*import static org.evosuite.runtime.EvoAssertions.*;
 import edu.osu.cs362.Point;
 import org.evosuite.runtime.EvoRunner;
 import org.evosuite.runtime.EvoRunnerParameters;
-import org.junit.runner.RunWith;
+import org.junit.runner.RunWith;*/
 
-@RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
+//@RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true)
 public class Point_ESTest extends Point_ESTest_scaffolding {
 
   @Test(timeout = 4000)
@@ -115,7 +115,7 @@ public class Point_ESTest extends Point_ESTest_scaffolding {
          //
          // no message in exception (getMessage() returned null)
          //
-         assertThrownBy("edu.osu.cs362.Point", e);
+         //assertThrownBy("edu.osu.cs362.Point", e);
       }
   }
 
@@ -155,7 +155,7 @@ public class Point_ESTest extends Point_ESTest_scaffolding {
          //
          // no message in exception (getMessage() returned null)
          //
-         assertThrownBy("edu.osu.cs362.Point", e);
+         //assertThrownBy("edu.osu.cs362.Point", e);
       }
   }
 }
