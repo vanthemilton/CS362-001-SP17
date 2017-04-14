@@ -6,15 +6,15 @@
 
 package edu.osu.cs362;
 
-import org.evosuite.runtime.annotation.EvoSuiteClassExclude;
+//import org.evosuite.runtime.annotation.EvoSuiteClassExclude;
 import org.junit.BeforeClass;
 import org.junit.Before;
 import org.junit.After;
 import org.junit.AfterClass;
-import org.evosuite.runtime.sandbox.Sandbox;
-import org.evosuite.runtime.sandbox.Sandbox.SandboxMode;
+/*import org.evosuite.runtime.sandbox.Sandbox;
+import org.evosuite.runtime.sandbox.Sandbox.SandboxMode;*/
 
-@EvoSuiteClassExclude
+//@EvoSuiteClassExclude
 public class Point_ESTest_scaffolding {
 
   private static final java.util.Properties defaultProperties = (java.util.Properties) java.lang.System.getProperties().clone(); 
@@ -37,7 +37,7 @@ public class Point_ESTest_scaffolding {
 
   @AfterClass 
   public static void clearEvoSuiteFramework(){ 
-    Sandbox.resetDefaultSecurityManager(); 
+    //Sandbox.resetDefaultSecurityManager();
     java.lang.System.setProperties((java.util.Properties) defaultProperties.clone()); 
   } 
 
