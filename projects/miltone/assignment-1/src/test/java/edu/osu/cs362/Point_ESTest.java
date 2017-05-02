@@ -6,12 +6,14 @@
 package edu.osu.cs362;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 /*import static org.evosuite.runtime.EvoAssertions.*;
 import edu.osu.cs362.Point;
 import org.evosuite.runtime.EvoRunner;
-import org.evosuite.runtime.EvoRunnerParameters;
-import org.junit.runner.RunWith;*/
+import org.evosuite.runtime.EvoRunnerParameters;*/
 
 //@RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true)
 public class Point_ESTest {

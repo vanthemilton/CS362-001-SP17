@@ -204,7 +204,7 @@ public class Appt {
             printableHour = 12;
         }
         String day= this.getStartMonth()+"/"+this.getStartDay()+"/"+this.getStartYear() + " at ";
-        return "\t"+ day +   printableHour +":"+ getStartMinute() + half + " ," +  getTitle()+ ", "+  getDescription()+"\n";
+        return "\t"+ day +   printableHour +":"+ getStartMinute() + half + ", " +  getTitle()+ ", "+  getDescription()+"\n";
     }
 
 
