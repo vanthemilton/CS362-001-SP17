@@ -23,12 +23,15 @@ import junit.framework.TestCase;
  *
         CONFIRMED BUGS
         1. PORT REGEX only accepts 3 digits, when it should accept up to the value of 2^16 ~= 65k
+        2. IP address units allow greater than 8 bit values, allowing any 3 digit number.
+        3. .[country] & .tv incorrectly invalid
 
 
         POSSIBLE BUGS
         1. From part A, last element of array of schemes isn't tested
         2. Larger than possible port number is treated as true
         3. Authority IP address accepts larger values than it should (999.999.999.999)
+        4. .[country] incorrectly invalid
  */
 
 
@@ -50,7 +53,7 @@ public class UrlValidatorTest extends TestCase {
    
    public void testManualTest()
    {
-       System.out.println("------------------Manual Test-------------------");
+       System.out.println("||||||||||||||||||||Manual Test BEGIN|||||||||||||||||||||||||");
        UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
 	   System.out.println(urlVal.isValid("http://www.amazon.com"));
 
@@ -64,7 +67,7 @@ public class UrlValidatorTest extends TestCase {
        System.out.println(urlVal.isValid("www.amazon.com"));
 
        // Authority
-       System.out.println("-------------------Authority------------------");
+       System.out.println("-------------------Authority Commercial-------------------");
        System.out.println(urlVal.isValid("http://amazon.com"));
        System.out.println(urlVal.isValid("https://www.amazon"));
        System.out.println(urlVal.isValid("https://www.com"));
@@ -75,6 +78,20 @@ public class UrlValidatorTest extends TestCase {
        System.out.println(urlVal.isValid("https://get-dog-food.com"));
        System.out.println(urlVal.isValid("https://thereoncewasamanfromperuwhodreamedhewaseattinghisshoehewoke" +
                "withafrightinthemiddleofthenighttofindthathisdreamhadcometrue.com"));
+
+       System.out.println("-------------------Authority NonCommercial-------------------");
+       System.out.println(urlVal.isValid("https://www.census.gov"));
+       System.out.println(urlVal.isValid("https://www.us.gov"));
+       System.out.println(urlVal.isValid("https://www.greenpeace.org"));
+       System.out.println(urlVal.isValid("https://www.travel.us")); //bug?
+       System.out.println(urlVal.isValid("https://www.travel.uk")); //bug?
+       System.out.println(urlVal.isValid("https://www.twitch.tv")); //bug?
+       System.out.println(urlVal.isValid("https://www.travel.eu")); //BOUNDARY
+       System.out.println(urlVal.isValid("https://www.oregonstate.edu"));
+       //! BUG CONFIRMED, SEE TOP OF FILE #3
+
+
+       System.out.println("-------------------Authority IP-------------------");
        System.out.println(urlVal.isValid("https://1.2.3.4"));
        System.out.println(urlVal.isValid("https://1.2.3.4."));
        System.out.println(urlVal.isValid("https://1.2.3.4.5"));
@@ -82,6 +99,8 @@ public class UrlValidatorTest extends TestCase {
        System.out.println(urlVal.isValid("https://256.256.256.256")); //bug?
        System.out.println(urlVal.isValid("https://999.999.999.999")); //bug?
        System.out.println(urlVal.isValid("https://1000.1000.1000.1000")); //BOUNDARY
+       //! BUG CONFIRMED, SEE TOP OF FILE #2
+
 
        // Port
        System.out.println("--------------------Port-----------------");
@@ -99,6 +118,7 @@ public class UrlValidatorTest extends TestCase {
        System.out.println(urlVal.isValid("http://www.amazon.com:1000000000000000000000000"));//bug?
        //! BUG CONFIRMED, SEE TOP OF FILE #1
 
+
        // Path
        System.out.println("--------------------Path-----------------");
        System.out.println(urlVal.isValid("http://www.amazon.com/a"));
@@ -110,13 +130,14 @@ public class UrlValidatorTest extends TestCase {
        System.out.println(urlVal.isValid("http://www.amazon.com//"));
 
 
-
-
-
        // Query
        System.out.println("---------------------Query----------------");
-       System.out.println(urlVal.isValid("http://www.amazon.com"));
-	   
+       System.out.println(urlVal.isValid("http://www.amazon.com/?search=pigs"));
+       System.out.println(urlVal.isValid("http://www.amazon.com/?search=pigs&id=suey"));
+       System.out.println(urlVal.isValid("https://www.amazon.com/s/field-keywords=piggy"));
+       System.out.println(urlVal.isValid("http://www.amazon.com/?search=125247"));
+       System.out.println(urlVal.isValid("http://www.amazon.com/?search=][:"));
+
    }
    
    
