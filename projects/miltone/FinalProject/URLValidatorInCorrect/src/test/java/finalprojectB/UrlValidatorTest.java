@@ -22,8 +22,8 @@ import junit.framework.TestCase;
 /**
  *
         CONFIRMED BUGS
-        1. PORT REGEX only accepts 3 digits, when it should accept up to the value of 2^16 ~= 65k
-        2. IP address units allow greater than 8 bit values, allowing any 3 digit number.
+        1. PORT REGEX only accepts 3 digits, should accept up to the value of 2^16 ~= 65k   UrlValidator line 158
+        2. IP address units allow greater than 8 bit values, allowing any 3 digit number.   InetAddressValidator line 69
         3. .[country] & .tv incorrectly invalid
 
 
@@ -33,7 +33,6 @@ import junit.framework.TestCase;
         3. Authority IP address accepts larger values than it should (999.999.999.999)
         4. .[country] incorrectly invalid
  */
-
 
 /**
  * Performs Validation Test for url validations.
@@ -153,7 +152,7 @@ public class UrlValidatorTest extends TestCase {
    
    public void testIsValid()
    {
-	   for(int i = 0;i<10000;i++)
+	   for(int i = 0; i < 10000 ;i++)
 	   {
 		   
 	   }
@@ -161,7 +160,7 @@ public class UrlValidatorTest extends TestCase {
    
    public void testAnyOtherUnitTest()
    {
-	   
+	   // found required number of bugs, oping out of additional tests
    }
    /**
     * Create set of tests by taking the testUrlXXX arrays and

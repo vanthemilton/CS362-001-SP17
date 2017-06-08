@@ -92,8 +92,8 @@ public class InetAddressValidator implements Serializable {
             }
 
             if (iIpSegment > 255) {
-                
-            	return true;
+
+            	return true;                    // BUG FOUND
             	
             }
 
