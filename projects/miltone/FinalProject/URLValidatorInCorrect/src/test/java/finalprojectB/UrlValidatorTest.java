@@ -22,9 +22,9 @@ import junit.framework.TestCase;
 /**
  *
         CONFIRMED BUGS
-        1. PORT REGEX only accepts 3 digits, should accept up to the value of 2^16 ~= 65k   UrlValidator line 158
-        2. IP address units allow greater than 8 bit values, allowing any 3 digit number.   InetAddressValidator line 69
-        3. .[country] & .tv incorrectly invalid
+        1. PORT REGEX only accepts 3 digits, should accept up to the value of 2^16 ~= 65k        UrlValidator line 158
+        2. IP address units allow greater than 8 bit values, allowing up to any 3 digit number.  InetAddressValidator line 69
+        3. Many country domains not defined, starting after Italy                                DomainValidator line 358
 
 
         POSSIBLE BUGS
@@ -157,17 +157,7 @@ public class UrlValidatorTest extends TestCase {
 		   
 	   }
    }
-   
-   public void testAnyOtherUnitTest()
-   {
-	   // found required number of bugs, oping out of additional tests
-   }
-   /**
-    * Create set of tests by taking the testUrlXXX arrays and
-    * running through all possible permutations of their combinations.
-    *
-    * @param testObjects Used to create a url.
-    */
+
    
 
 }
