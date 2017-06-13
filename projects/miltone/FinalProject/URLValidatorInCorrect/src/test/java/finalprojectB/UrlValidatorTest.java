@@ -17,6 +17,9 @@
 package finalprojectB;
 
 import junit.framework.TestCase;
+import org.junit.Test;
+
+import java.util.Random;
 
 
 /**
@@ -142,19 +145,82 @@ public class UrlValidatorTest extends TestCase {
    
    public void testYourFirstPartition()
    {
-	   
+       UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
+
+       // Port
+       System.out.println("--------------------Should Be Valid Ports (true)-----------------");
+       System.out.println(urlVal.isValid("http://www.amazon.com:-1"));
+       System.out.println(urlVal.isValid("http://www.amazon.com:0"));
+       System.out.println(urlVal.isValid("http://www.amazon.com:1"));
+       System.out.println(urlVal.isValid("http://www.amazon.com:80"));
+       System.out.println(urlVal.isValid("http://www.amazon.com:500"));
+       System.out.println(urlVal.isValid("http://www.amazon.com:513"));
+       System.out.println(urlVal.isValid("http://www.amazon.com:900"));
+       System.out.println(urlVal.isValid("http://www.amazon.com:999"));     // BOUNDARY
+       System.out.println(urlVal.isValid("http://www.amazon.com:1000"));
+       System.out.println(urlVal.isValid("http://www.amazon.com:10000"));
+       System.out.println(urlVal.isValid("http://www.amazon.com:65535"));
+       System.out.println("--------------------Should Be Invalid Ports (false)-----------------");
+       System.out.println(urlVal.isValid("http://www.amazon.com:65536"));
+       System.out.println(urlVal.isValid("http://www.amazon.com:99999"));
+       System.out.println(urlVal.isValid("http://www.amazon.com:100000"));
+
+
    }
    
-   public void testYourSecondPartition(){
-	   
+   public void testYourSecondPartition()
+   {
+       UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
+
+       System.out.println("-------------------Should Be Valid IPs (true)-------------------");
+       System.out.println(urlVal.isValid("https://1.2.3.4"));
+       System.out.println(urlVal.isValid("https://100.100.100.100"));
+       System.out.println(urlVal.isValid("https://255.255.255.255"));
+       System.out.println("-------------------Should Be Invalid IPs (false)-------------------");
+       System.out.println(urlVal.isValid("https://256.256.256.256"));
+       System.out.println(urlVal.isValid("https://999.999.999.999"));
+       System.out.println(urlVal.isValid("https://1000.1000.1000.1000")); //BOUNDARY
+       System.out.println(urlVal.isValid("https://5000.5000.5000.5000"));
+
    }
-   
-   
+
    public void testIsValid()
    {
-	   for(int i = 0; i < 10000 ;i++)
+       UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
+       Random random = new Random();
+
+       String[] scheme = {"http://",
+               "ftp://",
+               "h3t://"
+       };
+
+       String[] authority = {"www.reddit.com",
+               "amazon.com",
+               "shrimponthebarbie.au",
+               "192.168.0.0"
+       };
+
+       String[] port = {":69",
+               ":420",
+               ":666",
+               ""
+       };
+
+       String[] path = {"/dontopen/pls",
+               "/money",
+               "/anime",
+               ""
+       };
+
+       for(int i = 0; i < 10000 ;i++)
 	   {
-		   
+		   String toTest = scheme[random.nextInt(3)];
+		   toTest += authority[random.nextInt(4)];
+		   toTest += port[random.nextInt(4)];
+		   for(int j = 0; j < random.nextInt(2) + 1; j++)  {
+		       toTest += path[random.nextInt(4)];
+           }
+          assertTrue(urlVal.isValid(toTest));
 	   }
    }
 
